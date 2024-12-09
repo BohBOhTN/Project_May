@@ -5,7 +5,6 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Required for sessions
 
 DB_PATH = 'questions.db'  # Path to your database
-TOTAL_QUESTIONS = 9  # Update based on your total questions
 
 # Helper function to get a question by its ID
 def get_question_by_id(question_id):
@@ -16,32 +15,61 @@ def get_question_by_id(question_id):
     conn.close()
     return question
 
+# Helper function to get total number of questions
+def get_total_questions():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute("SELECT COUNT(*) FROM questions")
+    total = cursor.fetchone()[0]
+    conn.close()
+    return total
+
 @app.route('/question/<int:question_id>', methods=['GET', 'POST'])
 def question_page(question_id):
     if 'responses' not in session:
         session['responses'] = []
 
-    if request.method == 'POST':
-        user_response = int(request.form.get('response'))
-        session['responses'].append(user_response)
+    total_questions = get_total_questions()
 
-        # If last question, redirect to results
-        if question_id == TOTAL_QUESTIONS:
+    if request.method == 'POST':
+        user_response = request.form.get('response')
+        
+        if user_response is not None:  # Ensure a response was provided
+            try:
+                # Convert response to integer and store it in session
+                session['responses'].append(int(user_response))  
+                session.modified = True  # Mark session as modified
+            except ValueError:
+                print(f"Invalid response received: {user_response}")  # Debugging line
+        
+        # If it's the last question, redirect to results page
+        if question_id == total_questions:
             return redirect(url_for('results'))
 
+        # Otherwise, go to the next question
         return redirect(url_for('question_page', question_id=question_id + 1))
 
     question = get_question_by_id(question_id)
     if not question:
         return "Question not found", 404
 
-    return render_template('question.html', question_text=question[1],
-                           jamais=question[2], parfois=question[3],
-                           souvent=question[4], toujours=question[5], question_id=question_id)
+    return render_template('question.html', 
+                           question_text=question[1], 
+                           jamais=question[2], 
+                           parfois=question[3], 
+                           souvent=question[4], 
+                           toujours=question[5], 
+                           question_id=question_id)
 
 @app.route('/results')
 def results():
-    total_score = sum(session['responses'])
+    responses = session.get('responses', [])
+    try:
+        total_score = sum(map(int, responses))  # Ensure all values are integers
+    except ValueError as e:
+        print(f"Error when calculating score: {e}")
+        total_score = 0
+
     session.pop('responses', None)  # Clear responses after displaying results
     return render_template('results.html', total_score=total_score)
 
