@@ -74,8 +74,17 @@ def results():
         print(f"Error when calculating score: {e}")
         total_score = 0
 
+    # Generate feedback based on the score
+    if 0 <= total_score <= 10:
+        feedback = "Bien-être élève vous semblez bien gérer vos émotions et vos stress. Continuez."
+    elif 11 <= total_score <= 20:
+        feedback = "Bien-être modéré vous pourrez ressentir un certain stress ou des fluctuations émotionnelles mais elles restent gérables. Pensez à des activités relaxantes."
+    else:
+        feedback = "Risque élevé de détresse vous montrez des signes de stress ou de mal-être significatifs, une discussion avec un professionnel est recommandée."
+
     session.pop('responses', None)  # Clear responses after displaying results
-    return render_template('results.html', total_score=total_score)
+    return render_template('results.html', total_score=total_score, feedback=feedback)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
