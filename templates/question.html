@@ -1,0 +1,44 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Question {{ question_id }}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <p class="progress">Question {{ question_id }}</p>
+                <h1>{{ question_text }}</h1>
+            </header>
+            <form method="POST">
+                <div class="grid">
+                    <label class="card">
+                        <input type="radio" name="response" value="{{ jamais }}" required>
+                        <img src="{{ url_for('static', filename='img/jamais.png') }}" alt="JAMAIS">
+                        <p>JAMAIS</p>
+                    </label>
+                    <label class="card">
+                        <input type="radio" name="response" value="{{ parfois }}">
+                        <img src="{{ url_for('static', filename='img/parfois.png') }}" alt="PARFOIS">
+                        <p>PARFOIS</p>
+                    </label>
+                    <label class="card">
+                        <input type="radio" name="response" value="{{ souvent }}">
+                        <img src="{{ url_for('static', filename='img/sovent.png') }}" alt="SOUVENT">
+                        <p>SOUVENT</p>
+                    </label>
+                    <label class="card">
+                        <input type="radio" name="response" value="{{ toujours }}">
+                        <img src="{{ url_for('static', filename='img/toujours.png') }}" alt="TOUJOURS">
+                        <p>TOUJOURS</p>
+                    </label>
+                </div>
+                <footer>
+                    <button type="submit" class="continue-btn">Continue →</button>
+                </footer>
+            </form>
+        </div>
+    </body>
+    </html>

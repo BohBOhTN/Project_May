@@ -1,0 +1,19 @@
+QUESTION,JAMAIS,PARFOIS,SOUVENT,TOUJOURS,CATEGORY
+ressentez vous souvent une pression intense liée à vos études ou vos responsabilité,0,1,2,3,stress et gestion de stress 
+trouvez vous difficile de vous détendre après une journée d’étude,0,1,2,3,stress et gestion de stress 
+"avez vous des symptôme physique liée au stress (maus de tete, tension musculaire ,insomnie",0,1,2,3,stress et gestion de stress 
+avez vous ressenti de la tristesse ou un sentiment de vide,0,1,2,3,emotion et humeur
+vous arrive-t-il de vous sentir irrité ou fracturé sans raison évidente,0,1,2,3,emotion et humeur
+ressentez vous de la joie ou de l’enthousiasme dans vos activité quotidiennes,0,1,2,3,emotion et humeur
+dormez vous suffisamment pour vous sentir reposé et alerte,0,1,2,3,sommeil et energie 
+avez vous du mal à vous endormir ou à rester endormi,0,1,2,3,sommeil et energie 
+vous sentez vous souvent fatigué meme apres une nuit de sommeil complète,0,1,2,3,sommeil et energie 
+avez vous de difficultés à vous concentrer sur vous cours ou vos études,0,1,2,3,concentration et motivation 
+vous arrive-t-il de procrastiner régulièrement sur des taches importantes,0,1,2,3,concentration et motivation 
+vous sentez-vous motivé pour atteindre vos objectifs académiques,0,1,2,3,concentration et motivation 
+avez vous des relations positives avec vos camarades ou votre entourage,0,1,2,3,interaction sociale 
+evitez-vous souvent les interaction  sociales meme avec des amis proches,0,1,2,3,interaction sociale 
+ressentez-vous un soutien émotionnel de la part de vos proche,0,1,2,3,interaction sociale 
+avez-vous eu des pensées récurrentes sur le fait de vouloir abandonner vos études ou votre utilité,0,1,2,3,signaux d'alerte potentiels 
+vous êtes vos senti dépassé au point de ne plus pouvoir faire face à vos responsabilité ,0,1,2,3,signaux d'alerte potentiels 
+avez-vous eu des pensées négatives sur vous-meme ou votre  avenir,0,1,2,3,signaux d'alerte potentiels 
