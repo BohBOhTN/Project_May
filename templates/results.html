@@ -1,23 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Results</title>
+    <title>Résultats</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script> <!-- Add your API key here -->
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Your Total Score</h1>
+            <h1>Votre Score Total</h1>
         </header>
         <div class="result">
-            <p>Your score is: <strong>{{ total_score }}</strong></p>
-            <p><strong>Feedback:</strong> {{ feedback }}</p> <!-- Display the feedback message here -->
+            <p>Votre score est : <strong>{{ total_score }}</strong></p>
+            <p><strong>Retour :</strong> {{ feedback }}</p> <!-- Display the feedback message here -->
         </div>
         <footer>
-            <a href="/question/1" class="continue-btn">Restart</a>
+            <a href="/question/1" class="continue-btn">Recommencer</a>
+            
+            {% if total_score > 31 %}
+                <button class="check-doctor-btn" onclick="checkDoctor()">Vérifier près d'un médecin</button>
+            {% endif %}
         </footer>
     </div>
+
+    <script>
+        function checkDoctor() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var userLat = position.coords.latitude;
+                    var userLon = position.coords.longitude;
+
+                    // Doctor's coordinates (replace with actual doctor location if needed)
+                    var doctorLat = 34.7462697;
+                    var doctorLon = 10.7487829;
+
+                    // Generate the Google Maps directions URL
+                    var directionsUrl = `https://www.google.com/maps/dir/${userLat},${userLon}/${doctorLat},${doctorLon}/@${userLat},${userLon},11z/data=!3m1!4b1!4m4!4m3!1m1!4e1!1m0?entry=ttu`;
+
+                    // Open the URL in a new tab
+                    window.open(directionsUrl, '_blank');
+                }, function() {
+                    alert("Impossible de récupérer votre position. Veuillez autoriser l'accès à la géolocalisation.");
+                });
+            } else {
+                alert("La géolocalisation n'est pas supportée par ce navigateur.");
+            }
+        }
+    </script>
 </body>
 </html>
