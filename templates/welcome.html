@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="welcome-container">
+        <header>
+            <h1>Bienvenue dans le test de bien-être</h1>
+            <p>Commençons par évaluer votre bien-être. Cliquez ci-dessous pour démarrer le test !</p>
+        </header>
+        <main>
+            <a href="{{ url_for('question_page', question_id=1) }}" class="start-btn">Commencer le test</a>
+        </main>
+        <footer>
+            <p>Good luck!</p>
+        </footer>
+    </div>
+</body>
+</html>

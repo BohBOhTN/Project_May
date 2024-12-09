@@ -24,6 +24,10 @@ def get_total_questions():
     conn.close()
     return total
 
+@app.route('/')
+def welcome_page():
+    return render_template('welcome.html')
+
 @app.route('/question/<int:question_id>', methods=['GET', 'POST'])
 def question_page(question_id):
     if 'responses' not in session:
